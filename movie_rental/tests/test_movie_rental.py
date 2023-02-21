@@ -3,6 +3,7 @@ from app.framework.customer import Customer
 from app.framework.movie import Movie
 from app.framework.movie_type import MovieType
 from app.framework.rental import Rental
+from app.interceptors.interceptor_factory import InterceptorFactory
 from app.interceptors.interceptors import (
     WinterFRPInterceptor,
     LateReturnPenaltyInterceptor,
@@ -32,8 +33,10 @@ def test_statement():
         movie_rental_system.add_movie(movie)
 
     # Attach interceptors
-    winterFRPInterceptor = WinterFRPInterceptor()
-    lateReturnPenaltyInterceptor = LateReturnPenaltyInterceptor()
+    winterFRPInterceptor = InterceptorFactory().get_winter_frp_interceptor()
+    lateReturnPenaltyInterceptor = (
+        InterceptorFactory().get_late_return_penalty_interceptor()
+    )
     movie_rental_system.get_dispatcher().attach(winterFRPInterceptor)
     movie_rental_system.get_dispatcher().attach(lateReturnPenaltyInterceptor)
 
@@ -64,6 +67,7 @@ def test_statement():
 
     assert expected == customer.statement()
 
+
 def test_statement_winter(capfd):
     movie_rental_system = MovieRentalSystem()
 
@@ -83,8 +87,10 @@ def test_statement_winter(capfd):
         movie_rental_system.add_movie(movie)
 
     # Attach interceptors
-    winterFRPInterceptor = WinterFRPInterceptor()
-    lateReturnPenaltyInterceptor = LateReturnPenaltyInterceptor()
+    winterFRPInterceptor = InterceptorFactory().get_winter_frp_interceptor()
+    lateReturnPenaltyInterceptor = (
+        InterceptorFactory().get_late_return_penalty_interceptor()
+    )
     movie_rental_system.get_dispatcher().attach(winterFRPInterceptor)
     movie_rental_system.get_dispatcher().attach(lateReturnPenaltyInterceptor)
 
@@ -104,10 +110,7 @@ def test_statement_winter(capfd):
 
     # Check the print statement
     captured = capfd.readouterr()
-    assert (
-        captured.out
-        == "[Bonus]: +2 winter frequent renter points\n"
-    )
+    assert captured.out == "[Bonus]: +2 winter frequent renter points\n"
 
     # Assert
     expected = "Rental Record for Tony\n"
@@ -121,6 +124,7 @@ def test_statement_winter(capfd):
     expected += "You earned 9 frequent renter points"
 
     assert expected == customer.statement()
+
 
 def test_statement_late_return(capfd):
     movie_rental_system = MovieRentalSystem()
@@ -141,8 +145,10 @@ def test_statement_late_return(capfd):
         movie_rental_system.add_movie(movie)
 
     # Attach interceptors
-    winterFRPInterceptor = WinterFRPInterceptor()
-    lateReturnPenaltyInterceptor = LateReturnPenaltyInterceptor()
+    winterFRPInterceptor = InterceptorFactory().get_winter_frp_interceptor()
+    lateReturnPenaltyInterceptor = (
+        InterceptorFactory().get_late_return_penalty_interceptor()
+    )
     movie_rental_system.get_dispatcher().attach(winterFRPInterceptor)
     movie_rental_system.get_dispatcher().attach(lateReturnPenaltyInterceptor)
 
@@ -162,10 +168,7 @@ def test_statement_late_return(capfd):
 
     # Check the print statement
     captured = capfd.readouterr()
-    assert (
-        captured.out
-        == "[Warning]: Late return penalty +2.0\n"
-    )
+    assert captured.out == "[Warning]: Late return penalty +2.0\n"
 
     # Assert
     expected = "Rental Record for Tony\n"
@@ -200,8 +203,10 @@ def test_html_statement():
         movie_rental_system.add_movie(movie)
 
     # Attach interceptors
-    winterFRPInterceptor = WinterFRPInterceptor()
-    lateReturnPenaltyInterceptor = LateReturnPenaltyInterceptor()
+    winterFRPInterceptor = InterceptorFactory().get_winter_frp_interceptor()
+    lateReturnPenaltyInterceptor = (
+        InterceptorFactory().get_late_return_penalty_interceptor()
+    )
     movie_rental_system.get_dispatcher().attach(winterFRPInterceptor)
     movie_rental_system.get_dispatcher().attach(lateReturnPenaltyInterceptor)
 
@@ -225,8 +230,12 @@ def test_html_statement():
     expected += "<tr><th>Movie</th><th>Days</th><th>Amount</th></tr>\n"
     expected += "<tr><td>Avengers Endgame</td><td>2</td><td>2.0</td></tr>\n"
     expected += "<tr><td>Iron Man</td><td>3</td><td>3.5</td></tr>\n"
-    expected += "<tr><td>Black Panther - Wakanda Forever</td><td>1</td><td>3.0</td></tr>\n"
-    expected += "<tr><td>Ant Man & The Wasp - Quantumania</td><td>2</td><td>6.0</td></tr>\n"
+    expected += (
+        "<tr><td>Black Panther - Wakanda Forever</td><td>1</td><td>3.0</td></tr>\n"
+    )
+    expected += (
+        "<tr><td>Ant Man & The Wasp - Quantumania</td><td>2</td><td>6.0</td></tr>\n"
+    )
     expected += "<tr><td>Cars</td><td>3</td><td>1.5</td></tr>\n"
     expected += "<tr><td>Toy Story</td><td>4</td><td>3.0</td></tr>\n"
     expected += "</table>\n"
@@ -234,6 +243,7 @@ def test_html_statement():
     expected += "<p>You earned <em>7</em> frequent renter points</p>"
 
     assert expected == customer.html_statement()
+
 
 def test_html_statement_winter(capfd):
     movie_rental_system = MovieRentalSystem()
@@ -254,8 +264,10 @@ def test_html_statement_winter(capfd):
         movie_rental_system.add_movie(movie)
 
     # Attach interceptors
-    winterFRPInterceptor = WinterFRPInterceptor()
-    lateReturnPenaltyInterceptor = LateReturnPenaltyInterceptor()
+    winterFRPInterceptor = InterceptorFactory().get_winter_frp_interceptor()
+    lateReturnPenaltyInterceptor = (
+        InterceptorFactory().get_late_return_penalty_interceptor()
+    )
     movie_rental_system.get_dispatcher().attach(winterFRPInterceptor)
     movie_rental_system.get_dispatcher().attach(lateReturnPenaltyInterceptor)
 
@@ -275,11 +287,7 @@ def test_html_statement_winter(capfd):
 
     # Check the print statement
     captured = capfd.readouterr()
-    assert (
-        captured.out
-        == "[Bonus]: +2 winter frequent renter points\n"
-    )
-
+    assert captured.out == "[Bonus]: +2 winter frequent renter points\n"
 
     # Assert
     expected = "<h1>Rental Record for <em>Tony</em></h1>\n"
@@ -287,8 +295,12 @@ def test_html_statement_winter(capfd):
     expected += "<tr><th>Movie</th><th>Days</th><th>Amount</th></tr>\n"
     expected += "<tr><td>Avengers Endgame</td><td>2</td><td>2.0</td></tr>\n"
     expected += "<tr><td>Iron Man</td><td>3</td><td>3.5</td></tr>\n"
-    expected += "<tr><td>Black Panther - Wakanda Forever</td><td>1</td><td>3.0</td></tr>\n"
-    expected += "<tr><td>Ant Man & The Wasp - Quantumania</td><td>2</td><td>6.0</td></tr>\n"
+    expected += (
+        "<tr><td>Black Panther - Wakanda Forever</td><td>1</td><td>3.0</td></tr>\n"
+    )
+    expected += (
+        "<tr><td>Ant Man & The Wasp - Quantumania</td><td>2</td><td>6.0</td></tr>\n"
+    )
     expected += "<tr><td>Cars</td><td>3</td><td>1.5</td></tr>\n"
     expected += "<tr><td>Toy Story</td><td>4</td><td>3.0</td></tr>\n"
     expected += "</table>\n"
@@ -296,6 +308,7 @@ def test_html_statement_winter(capfd):
     expected += "<p>You earned <em>9</em> frequent renter points</p>"
 
     assert expected == customer.html_statement()
+
 
 def test_html_statement_late_return(capfd):
     movie_rental_system = MovieRentalSystem()
@@ -316,8 +329,10 @@ def test_html_statement_late_return(capfd):
         movie_rental_system.add_movie(movie)
 
     # Attach interceptors
-    winterFRPInterceptor = WinterFRPInterceptor()
-    lateReturnPenaltyInterceptor = LateReturnPenaltyInterceptor()
+    winterFRPInterceptor = InterceptorFactory().get_winter_frp_interceptor()
+    lateReturnPenaltyInterceptor = (
+        InterceptorFactory().get_late_return_penalty_interceptor()
+    )
     movie_rental_system.get_dispatcher().attach(winterFRPInterceptor)
     movie_rental_system.get_dispatcher().attach(lateReturnPenaltyInterceptor)
 
@@ -337,11 +352,7 @@ def test_html_statement_late_return(capfd):
 
     # Check the print statement
     captured = capfd.readouterr()
-    assert (
-        captured.out
-        == "[Warning]: Late return penalty +2.0\n"
-    )
-
+    assert captured.out == "[Warning]: Late return penalty +2.0\n"
 
     # Assert
     expected = "<h1>Rental Record for <em>Tony</em></h1>\n"
@@ -349,8 +360,12 @@ def test_html_statement_late_return(capfd):
     expected += "<tr><th>Movie</th><th>Days</th><th>Amount</th></tr>\n"
     expected += "<tr><td>Avengers Endgame</td><td>2</td><td>2.0</td></tr>\n"
     expected += "<tr><td>Iron Man</td><td>3</td><td>3.5</td></tr>\n"
-    expected += "<tr><td>Black Panther - Wakanda Forever</td><td>1</td><td>3.0</td></tr>\n"
-    expected += "<tr><td>Ant Man & The Wasp - Quantumania</td><td>2</td><td>6.0</td></tr>\n"
+    expected += (
+        "<tr><td>Black Panther - Wakanda Forever</td><td>1</td><td>3.0</td></tr>\n"
+    )
+    expected += (
+        "<tr><td>Ant Man & The Wasp - Quantumania</td><td>2</td><td>6.0</td></tr>\n"
+    )
     expected += "<tr><td>Cars</td><td>3</td><td>1.5</td></tr>\n"
     expected += "<tr><td>Toy Story</td><td>10</td><td>12.0</td></tr>\n"
     expected += "</table>\n"

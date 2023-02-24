@@ -1,4 +1,3 @@
-from app.interceptors.context import Context
 from app.interceptors.interceptors import (
     Interceptor,
     WinterFRPInterceptor,

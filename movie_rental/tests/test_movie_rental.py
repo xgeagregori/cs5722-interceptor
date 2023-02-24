@@ -1,17 +1,12 @@
+from datetime import datetime
+
 from app.framework.movie_rental_system import MovieRentalSystem
 from app.framework.customer import Customer
 from app.framework.movie import Movie
 from app.framework.movie_type import MovieType
 from app.framework.rental import Rental
 from app.interceptors.interceptor_factory import InterceptorFactory
-from app.interceptors.interceptors import (
-    WinterFRPInterceptor,
-    LateReturnPenaltyInterceptor,
-)
-
 from app.interceptors.context import Context
-from app.interceptors.dispatcher import Dispatcher
-from datetime import datetime
 
 
 def test_statement():
@@ -33,12 +28,12 @@ def test_statement():
         movie_rental_system.add_movie(movie)
 
     # Attach interceptors
-    winterFRPInterceptor = InterceptorFactory().get_winter_frp_interceptor()
-    lateReturnPenaltyInterceptor = (
+    winter_frp_interceptor = InterceptorFactory().get_winter_frp_interceptor()
+    late_return_penalty_interceptor = (
         InterceptorFactory().get_late_return_penalty_interceptor()
     )
-    movie_rental_system.get_dispatcher().attach(winterFRPInterceptor)
-    movie_rental_system.get_dispatcher().attach(lateReturnPenaltyInterceptor)
+    movie_rental_system.get_dispatcher().attach(winter_frp_interceptor)
+    movie_rental_system.get_dispatcher().attach(late_return_penalty_interceptor)
 
     # Add rentals
     customer.add_rental(Rental(movies[0], 2))
@@ -87,12 +82,12 @@ def test_statement_winter(capfd):
         movie_rental_system.add_movie(movie)
 
     # Attach interceptors
-    winterFRPInterceptor = InterceptorFactory().get_winter_frp_interceptor()
-    lateReturnPenaltyInterceptor = (
+    winter_frp_interceptor = InterceptorFactory().get_winter_frp_interceptor()
+    late_return_penalty_interceptor = (
         InterceptorFactory().get_late_return_penalty_interceptor()
     )
-    movie_rental_system.get_dispatcher().attach(winterFRPInterceptor)
-    movie_rental_system.get_dispatcher().attach(lateReturnPenaltyInterceptor)
+    movie_rental_system.get_dispatcher().attach(winter_frp_interceptor)
+    movie_rental_system.get_dispatcher().attach(late_return_penalty_interceptor)
 
     # Add rentals
     customer.add_rental(Rental(movies[0], 2))
@@ -145,12 +140,12 @@ def test_statement_late_return(capfd):
         movie_rental_system.add_movie(movie)
 
     # Attach interceptors
-    winterFRPInterceptor = InterceptorFactory().get_winter_frp_interceptor()
-    lateReturnPenaltyInterceptor = (
+    winter_frp_interceptor = InterceptorFactory().get_winter_frp_interceptor()
+    late_return_penalty_interceptor = (
         InterceptorFactory().get_late_return_penalty_interceptor()
     )
-    movie_rental_system.get_dispatcher().attach(winterFRPInterceptor)
-    movie_rental_system.get_dispatcher().attach(lateReturnPenaltyInterceptor)
+    movie_rental_system.get_dispatcher().attach(winter_frp_interceptor)
+    movie_rental_system.get_dispatcher().attach(late_return_penalty_interceptor)
 
     # Add rentals
     customer.add_rental(Rental(movies[0], 2))
@@ -203,12 +198,12 @@ def test_html_statement():
         movie_rental_system.add_movie(movie)
 
     # Attach interceptors
-    winterFRPInterceptor = InterceptorFactory().get_winter_frp_interceptor()
-    lateReturnPenaltyInterceptor = (
+    winter_frp_interceptor = InterceptorFactory().get_winter_frp_interceptor()
+    late_return_penalty_interceptor = (
         InterceptorFactory().get_late_return_penalty_interceptor()
     )
-    movie_rental_system.get_dispatcher().attach(winterFRPInterceptor)
-    movie_rental_system.get_dispatcher().attach(lateReturnPenaltyInterceptor)
+    movie_rental_system.get_dispatcher().attach(winter_frp_interceptor)
+    movie_rental_system.get_dispatcher().attach(late_return_penalty_interceptor)
 
     # Add rentals
     customer.add_rental(Rental(movies[0], 2))
@@ -264,12 +259,12 @@ def test_html_statement_winter(capfd):
         movie_rental_system.add_movie(movie)
 
     # Attach interceptors
-    winterFRPInterceptor = InterceptorFactory().get_winter_frp_interceptor()
-    lateReturnPenaltyInterceptor = (
+    winter_frp_interceptor = InterceptorFactory().get_winter_frp_interceptor()
+    late_return_penalty_interceptor = (
         InterceptorFactory().get_late_return_penalty_interceptor()
     )
-    movie_rental_system.get_dispatcher().attach(winterFRPInterceptor)
-    movie_rental_system.get_dispatcher().attach(lateReturnPenaltyInterceptor)
+    movie_rental_system.get_dispatcher().attach(winter_frp_interceptor)
+    movie_rental_system.get_dispatcher().attach(late_return_penalty_interceptor)
 
     # Add rentals
     customer.add_rental(Rental(movies[0], 2))
@@ -329,12 +324,12 @@ def test_html_statement_late_return(capfd):
         movie_rental_system.add_movie(movie)
 
     # Attach interceptors
-    winterFRPInterceptor = InterceptorFactory().get_winter_frp_interceptor()
-    lateReturnPenaltyInterceptor = (
+    winter_frp_interceptor = InterceptorFactory().get_winter_frp_interceptor()
+    late_return_penalty_interceptor = (
         InterceptorFactory().get_late_return_penalty_interceptor()
     )
-    movie_rental_system.get_dispatcher().attach(winterFRPInterceptor)
-    movie_rental_system.get_dispatcher().attach(lateReturnPenaltyInterceptor)
+    movie_rental_system.get_dispatcher().attach(winter_frp_interceptor)
+    movie_rental_system.get_dispatcher().attach(late_return_penalty_interceptor)
 
     # Add rentals
     customer.add_rental(Rental(movies[0], 2))

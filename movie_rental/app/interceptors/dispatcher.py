@@ -1,4 +1,4 @@
-class Dispatcher(object):
+class Dispatcher:
     def __init__(self):
         self.interceptors = []
 

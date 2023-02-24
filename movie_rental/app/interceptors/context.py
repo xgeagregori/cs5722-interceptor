@@ -11,6 +11,10 @@ class Context:
     def get_customer_rentals(self):
         """Get customer rentals"""
         return self.customer.get_rentals()
+    
+    def get_winter_frequent_renter_points(self):
+        """Get winter frequent renter points for customer"""
+        return self.customer.get_winter_frequent_renter_points()
 
     def get_penalty_points(self):
         """Get penalty points for customer"""
@@ -20,9 +24,9 @@ class Context:
         """Get date of rental"""
         return self.date
 
-    def set_winter_frequent_renter_points(self, points: int):
+    def add_winter_frequent_renter_points(self, points: int):
         """Set winter frequent renter points for customer"""
-        self.customer.set_winter_frequent_renter_points(points)
+        self.customer.add_winter_frequent_renter_points(points)
 
     def add_penalty_points(self, points: int):
         """Add penalty points to customer"""

@@ -102,9 +102,9 @@ class Customer:
         """Return the number of winter frequent renter points on the customer's account."""
         return self.winter_frequent_renter_points
 
-    def set_winter_frequent_renter_points(self, points: int):
+    def add_winter_frequent_renter_points(self, points: int):
         """Set the number of winter frequent renter points on the customer's account."""
-        self.winter_frequent_renter_points = points
+        self.winter_frequent_renter_points += points
 
     def get_penalty_points(self) -> int:
         """Return the number of penalty points on the customer's account."""

@@ -17,7 +17,9 @@ class WinterFRPInterceptor(Interceptor):
 
         if date.month == 12:
             context.add_winter_frequent_renter_points(2)
-            print(f"[Bonus]: +{context.get_winter_frequent_renter_points()} winter frequent renter points")
+            print(
+                f"[Bonus]: +{context.get_winter_frequent_renter_points()} winter frequent renter points"
+            )
 
 
 class LateReturnPenaltyInterceptor(Interceptor):

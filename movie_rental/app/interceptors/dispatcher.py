@@ -18,8 +18,3 @@ class Dispatcher(object):
         """Dispatch the context to the interceptors"""
         for interceptor in self.interceptors:
             interceptor.intercept(context)
-
-    # TODO: Activity diagram for the statement operation
-
-    # TODO: Intercepting the transition where we calculate the charge and penalties
-    # TODO: for late return and the one we intercept is where we calculate the renter points

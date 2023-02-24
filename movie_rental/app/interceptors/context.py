@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from ..framework.customer import Customer
+from ..framework.rental import Rental
 
 
 class Context:
@@ -11,6 +12,10 @@ class Context:
     def get_customer_rentals(self):
         """Get customer rentals"""
         return self.customer.get_rentals()
+    
+    def get_days_rented(self, rental: Rental):
+        """Get days rented"""
+        return rental.get_days_rented()
     
     def get_winter_frequent_renter_points(self):
         """Get winter frequent renter points for customer"""

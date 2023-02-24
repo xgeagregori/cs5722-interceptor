@@ -26,7 +26,7 @@ class LateReturnPenaltyInterceptor(Interceptor):
         rentals = context.get_customer_rentals()
 
         for rental in rentals:
-            if rental.get_days_rented() > 7:
+            if context.get_days_rented(rental) > 7:
                 context.add_penalty_points(1)
                 print(
                     f"[Warning]: Late return penalty +{2.0 * context.get_penalty_points()}"

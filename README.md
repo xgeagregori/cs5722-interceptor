@@ -1,5 +1,5 @@
 # 🎬 Movie Rental System - Interceptor Pattern
-This is the repository of our application Fix&Power for the module CS5722 - Software Architecture. 
+This is the repository of the implementation of the Interceptor Pattern for the module CS5722 - Software Architecture. 
 
 The goal was to implement the Interceptor Pattern in an object-oriented application.
 
